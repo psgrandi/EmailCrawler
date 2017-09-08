@@ -6,7 +6,6 @@
 	<artifactId>emailcrawler</artifactId>
 	<version>1.0.0</version>
 	<packaging>war</packaging>
-
 	<name>emailcrawler</name>
 	<url>http://maven.apache.org</url>
 
@@ -71,12 +70,11 @@
 			<artifactId>jsoup</artifactId>
 			<version>${jsoup.properties}</version>
 		</dependency>
-		
+
 		<!-- GSON -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-			<version>${gson.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -89,6 +87,36 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.heroku.sdk</groupId>
+				<artifactId>heroku-maven-plugin</artifactId>
+				<version>1.1.1</version>
+				<configuration>
+					<appName>psgrandi-emailcrawler-v1</appName>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.github.jsimone</groupId>
+									<artifactId>webapp-runner</artifactId>
+									<version>8.5.11.3</version>
+									<destFileName>webapp-runner.jar</destFileName>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

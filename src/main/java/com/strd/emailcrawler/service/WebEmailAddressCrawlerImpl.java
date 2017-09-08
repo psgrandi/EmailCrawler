@@ -89,13 +89,7 @@ public class WebEmailAddressCrawlerImpl implements WebCrawler {
 	private Document connect(String URL) throws IOException, MalformedURLException, HttpStatusException, CertificateException {
 		logger.info(crawlerId + ": Accessing page: " + URL);
 		
-		Document document = null;
-		
-		if (!pageLinks.contains(URL) && !FILTERS.matcher(URL.toLowerCase()).matches()) {
-			document = Jsoup.connect(URL).get();
-		}
-		
-		return document;
+		return Jsoup.connect(URL).get();
 	}
 	
 	private void connectOriginalUrl(String URL) throws IOException, MalformedURLException, HttpStatusException, CertificateException {
